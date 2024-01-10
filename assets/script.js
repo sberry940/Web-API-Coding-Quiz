@@ -7,6 +7,10 @@ const answerButtonsElement = document.getElementById('answer-buttons')
 let shuffledQuestions, currentQuestionIndex
 
 startButton.addEventListener('click', startGame)
+nextButton.addEventListener('click', () => {
+    currentQuestionIndex++
+    setNextQuestion()
+})
 
 function startGame() {
     startButton.classList.add('hide')
@@ -49,6 +53,12 @@ function selectAnswer(e) {
     Array.from(answerButtonsElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
     })
+    if(shuffledQuestions.length > currentQuestionIndex + 1) {
+        nextButton.classList.remove('hide')
+    }else {
+        startButton.innerText = 'Restart'
+        startButton.classList.remove('hide')
+    }
 }
 
 function setStatusClass(element, correct) {
@@ -67,10 +77,38 @@ function clearStatusClass(element) {
 
 const questions = [
     {
-        question: 'What is 2 + 2',
+        question: 'Inside which HTML element do we put the JavaScript?',
         answers: [
-            { text: '4', correct: true },
-            { text: '22', correct: false}
+            { text: '<script>', correct: true },
+            { text: '<scripting>', correct: false}
+        ]
+    },
+    {
+        question: 'The external JavaScript file must contain the <script> tag.',
+        answers: [
+            { text: 'true', correct: true },
+            { text: 'false', correct: false}
+        ]
+    },
+    {
+        question: 'How do you call a function named, myFunction?',
+        answers: [
+            { text: 'myFunction()', correct: true },
+            { text: 'call myFunction()', correct: false}
+        ]
+    },
+    {
+        question: 'JavaScript is the same as Java',
+        answers: [
+            { text: 'true', correct: false },
+            { text: 'false', correct: true}
+        ]
+    },
+    {
+        question: 'How do you declare a JavaScript variable?',
+        answers: [
+            { text: 'v carName;', correct: false },
+            { text: 'var carName;', correct: true}
         ]
     }
 ]
